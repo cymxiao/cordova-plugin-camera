@@ -82,7 +82,7 @@ static NSString* toBase64(NSData* data) {
     pictureOptions.popoverOptions = [command argumentAtIndex:10 withDefault:nil];
     pictureOptions.cameraDirection = [[command argumentAtIndex:11 withDefault:@(UIImagePickerControllerCameraDeviceRear)] unsignedIntegerValue];
     //todo: check index, is it map to www/camera.js
-    pictureOptions.cropToSize =  [[command argumentAtIndex:12 withDefault:@(NO)] boolValue];
+    pictureOptions.cropToSize =  [[command argumentAtIndex:12 withDefault:@(YES)] boolValue];
 
     pictureOptions.popoverSupported = NO;
     pictureOptions.usesGeolocation = NO;
@@ -147,7 +147,7 @@ static NSString* toBase64(NSData* data) {
         CDVPictureOptions* pictureOptions = [CDVPictureOptions createFromTakePictureArguments:command];
         pictureOptions.popoverSupported = [weakSelf popoverSupported];
         pictureOptions.usesGeolocation = [weakSelf usesGeolocation];
-        //pictureOptions.cropToSize = [weakSelf cropToSize];
+        pictureOptions.cropToSize = YES;
 
         BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:pictureOptions.sourceType];
         if (!hasCamera) {
